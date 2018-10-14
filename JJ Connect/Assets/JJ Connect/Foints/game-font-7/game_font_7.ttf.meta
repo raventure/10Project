@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 73c0462ba8e80ad4e817a0e5b5864d1b
+timeCreated: 1475406630
+licenseType: Store
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Game Font 7
+  fontNames:
+  - Game Font 7
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 230edc4e736a14a43bc6538626ba2e02, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

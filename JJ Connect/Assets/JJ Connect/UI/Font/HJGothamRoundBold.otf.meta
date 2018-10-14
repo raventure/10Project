@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: d9c63fa09786d460faa3d2a00a4a437a
+timeCreated: 1495287993
+licenseType: Store
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: HJ Gotham Round
+  fontNames:
+  - HJ Gotham Round
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

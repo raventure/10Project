@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 2722bf82498a7004f8fe7b0cd586b026
+timeCreated: 1475406630
+licenseType: Store
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Zorque
+  fontNames:
+  - Zorque
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
