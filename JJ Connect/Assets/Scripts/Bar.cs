@@ -20,10 +20,10 @@ public class Bar : MonoBehaviour {
         switch(map)
         {
             case 4:
-                duration = 15;
+                duration = 20;
                 break;
             case 6:
-                duration = 30;
+                duration = 40;
                 break;
             default:
                 duration = 60;

@@ -66,6 +66,17 @@ public class DBScript : MonoBehaviour
 
     public void GetRecordAvgList()
     {
+        Debug.Log("기록 조회");
+        WWWForm form = new WWWForm();
+        form.AddField("Type", "avg");
+        resultFunction rf = new resultFunction(rf_GetRecordAvfList);
+        StartCoroutine(DataBaseControl.Instant.conn.SendData(URL + "/GetRecordAvgList.php", form, rf));
+    }
+
+    void rf_GetRecordAvfList()
+    {
+        ListResult();
+        Settings.avgRecordList = data;
 
     }
 

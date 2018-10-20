@@ -12,9 +12,7 @@ public class StartGameScript : MonoBehaviour {
         //유저 정보 체크
         Settings.CheckNRU();
         //Settings.Load();
-        Debug.Log(SystemInfo.deviceUniqueIdentifier);
-
-
+        DataBaseControl.Instant.db.GetRecordAvgList();
     }
     public void Reset(bool isActive)
     {

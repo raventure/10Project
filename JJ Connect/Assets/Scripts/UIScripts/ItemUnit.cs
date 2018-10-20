@@ -35,12 +35,31 @@ public class ItemUnit : MonoBehaviour, IPointerClickHandler {
         openObj.SetActive(true);
         numberText.text = index.ToString();
     }
-    public void SetClear()
+    public void SetClear(int state)
     {
         lockObj.SetActive(false);
         openObj.SetActive(false);
         clearObj.SetActive(true);
-        clearText.text = index.ToString() + "Clear";
+        
+        Image img = clearObj.GetComponent<Image>();
+        switch (state)
+        {
+            case 2:
+                clearText.text = index.ToString()+"\n"+"Bronze";
+                img.color = new Color32(205, 127, 50, 255);
+                break;
+            case 3:
+                clearText.text = index.ToString() + "\n" + "Silver";
+                img.color = new Color32(211, 211, 211, 255);
+                break;
+            case 4:
+                clearText.text = index.ToString() + "\n" + "Gold";
+                img.color = new Color32(255, 215, 0, 255);
+                break;
+            default:
+                clearText.text = index.ToString() + "\n" + "-";
+                break;
+        }
     }
 
     // 이벤트 먹이고 싶을 때

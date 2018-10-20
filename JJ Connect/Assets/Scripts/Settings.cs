@@ -14,12 +14,25 @@ public class SaveInfo
     public int state;
     public string record;
 }
+public class ClearInfo
+{
+    public int map;
+    public int level;
+    public int state;
+    public float psersonReocrd;
+    public float goldRecord;
+    public float silverRecord;
+    public float bronzeRecord;
+}
 
 public class Settings{
     static public List<SaveInfo> saveInfo4 = new List<SaveInfo>();
     static public List<SaveInfo> saveInfo6 = new List<SaveInfo>();
     static public List<SaveInfo> saveInfo8 = new List<SaveInfo>();
     static public List<SaveInfo> _saveInfo0 = new List<SaveInfo>();
+    static public List<ClearInfo> clearInfo = new List<ClearInfo>();
+
+    static public List<Dictionary<string, object>> avgRecordList; //기록 리스트
 
 
     public static bool HasKey(string key)
@@ -86,7 +99,8 @@ public class Settings{
     public static void AddSaveData(int map, int number, int state, string record)
     {
         Debug.Log("저장");
-        bool saving = false;
+        //bool saving = false;
+        bool saving = true; // 중복 저장 가능하도록
         var binaryFormatter = new BinaryFormatter();
         var memoryStream = new MemoryStream();
         switch (map)
@@ -210,6 +224,24 @@ public class Settings{
 
         binaryFormmater.Serialize(memoryStream, saveInfo8);
         PlayerPrefs.SetString("SaveInfo8", Convert.ToBase64String(memoryStream.GetBuffer()));
+    }
+
+
+    // 기록 조회
+    public static int GetAvgRecord(int map, int level)
+    {
+        int i = 0;
+        foreach(var lt in avgRecordList)
+        {
+            if(lt["fdMap"].ToString() == map.ToString() && lt["fdLevel"].ToString() == level.ToString())
+            {
+                i++;
+                return i -1 ;
+                //return float.Parse(lt["fdAvg"].ToString());
+            }
+        }
+        return -1;
+        //return 0.0f;
     }
 
 

@@ -58,7 +58,8 @@ public class SelectLevelScript : MonoBehaviour {
             }
             if(Settings._saveInfo0[i].state >= 1)
             {
-                listUnit[i].SetClear();
+                listUnit[i].SetClear(Settings._saveInfo0[i].state);
+                
             }
             
         }
