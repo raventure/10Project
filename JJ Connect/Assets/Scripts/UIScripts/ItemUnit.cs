@@ -98,16 +98,21 @@ public class ItemUnit : MonoBehaviour, IPointerClickHandler {
                 Settings._saveInfo = Settings.saveInfo8;
                 break;
         }
-        if(Settings._saveInfo[index-1].state == 0)
+
+        */
+        if (Settings._saveInfo0[index - 1].state == 0)
         {
             MainCanvas.Main.startGameScript.StartPlayerLevel(map, index);
         }
         else
         {
-            MainCanvas.Main.winScript.GameWin();
+            Debug.Log("클리어 된 맵:"+ index);
+            MainCanvas.Main.startGameScript.currentMap = map;
+            MainCanvas.Main.startGameScript.currentLevel = index;
+            MainCanvas.Main.clearScript.ClearView();
+            //MainCanvas.Main.winScript.GameWin();
         }
-        */
-        MainCanvas.Main.startGameScript.StartPlayerLevel(map, index);
+        //MainCanvas.Main.startGameScript.StartPlayerLevel(map, index);
 
         while (currentTime < timeZoomIn)
         {

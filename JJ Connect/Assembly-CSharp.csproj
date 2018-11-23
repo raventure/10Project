@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\StartGameScript.cs" />
     <Compile Include="Assets\Scripts\TableUnit.cs" />
     <Compile Include="Assets\Scripts\UIScripts\AddSelectItem.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\ClearScript.cs" />
     <Compile Include="Assets\Scripts\UIScripts\FaderControl.cs" />
     <Compile Include="Assets\Scripts\UIScripts\GameDefine.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGameScript.cs" />

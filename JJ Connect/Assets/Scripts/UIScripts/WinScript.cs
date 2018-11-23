@@ -17,6 +17,9 @@ public class WinScript : MonoBehaviour {
     bool checkRecord;
     float avg;
     float std;
+    float goldRecord;
+    float silverRecord;
+    float bronzeRecord;
 
     public void Reset()
     {
@@ -57,9 +60,9 @@ public class WinScript : MonoBehaviour {
                 avg = float.Parse(MainCanvas.Main.barScript.timer0) - Random.Range(0.005f, 0.014f);
                 std = avg * 0.05f;
             }
-            float goldRecord = Mathf.Round((avg - std) * 1000) / 1000;
-            float silverRecord = Mathf.Round((avg) * 1000) / 1000;
-            float bronzeRecord = Mathf.Round((avg + std) * 1000) / 1000;
+            goldRecord = Mathf.Round((avg - std) * 1000) / 1000;
+            silverRecord = Mathf.Round((avg) * 1000) / 1000;
+            bronzeRecord = Mathf.Round((avg + std) * 1000) / 1000;
 
             goldTime.text = "'" + goldRecord;
             silverTime.text = "'" + silverRecord;
@@ -111,21 +114,28 @@ public class WinScript : MonoBehaviour {
             medalImg[2].color = new Color32(255, 255, 255, 255);
             feedback.text = "NOT BAD.";
         }
-
         Save(currentMap, currentLevel, state, MainCanvas.Main.barScript.timer0);
+        Settings.WorldRecordSave(currentMap, currentLevel, state, MainCanvas.Main.barScript.timer0, goldRecord, silverRecord, bronzeRecord);
     }
 
+
+        
 
     void Save(int map, int level, int state, string record)
     {
 
         Settings.AddSaveData(map, level, state, record);
-
     }
 
     public void ContinueButton()
     {
         MainCanvas.Main.fadeScript.Fade(new FaderControl.Callback0(MidleContinue));
+    }
+
+    public void BackButton()
+    {
+        Debug.Log("백 버튼 입력");
+        MainCanvas.Main.fadeScript.Fade(new FaderControl.Callback0(MidleBack));
     }
 
     void MidleContinue()
@@ -135,7 +145,7 @@ public class WinScript : MonoBehaviour {
         if(Settings._saveInfo0.Exists(e => e.state == 0))
         {
             // 아직 클리어 못한게 있으면.
-            for(int i = 1; i <= 100; i++)
+            for(int i = 1; i <= 1000; i++)
             {
                 int _rnd = Random.Range(0, 200);
                 if(Settings._saveInfo0[_rnd].state == 0)
@@ -160,6 +170,12 @@ public class WinScript : MonoBehaviour {
         MainCanvas.Main.startGameScript.currentLevel = level;
         MainCanvas.Main.Reset(MainState.StateBack.Continue);
     }
+
+    public void MidleBack()
+    {
+        MainCanvas.Main.Reset(MainState.StateBack.SelectLevel);
+    }
+
     public void SetActive(bool isActive)
     {
         gameObject.SetActive(isActive);

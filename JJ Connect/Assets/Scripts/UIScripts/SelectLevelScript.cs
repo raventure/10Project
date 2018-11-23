@@ -34,12 +34,6 @@ public class SelectLevelScript : MonoBehaviour {
     void SetContentTable(int map)
     {
         Settings.Load();
-        Debug.Log(Settings.saveInfo4.Count);
-        Debug.Log(Settings.saveInfo6.Count);
-        Debug.Log(Settings.saveInfo8.Count);
-        Debug.Log(Settings._saveInfo0.Count);
-
-        Debug.Log("SetContentTable");
         int maxLv = Settings.GetMaxLevel(map);
         //Debug.Log("맥스 레벨 체크 :" + maxLv);
         maxLv = 200;

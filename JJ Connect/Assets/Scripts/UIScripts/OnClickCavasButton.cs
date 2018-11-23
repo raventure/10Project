@@ -18,7 +18,6 @@ public class OnClickCavasButton : MonoBehaviour, IPointerClickHandler {
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("버튼 클릭");
         if(!running)
         {
             StartCoroutine(ButtonClick());
