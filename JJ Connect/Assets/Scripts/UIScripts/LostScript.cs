@@ -14,7 +14,7 @@ public class LostScript : MonoBehaviour {
     {
         MainState.SetState(MainState.State.GameOver);
         SetActive(true);
-        //오디오
+        MainAudio.Main.PlaySound(TypeAudio.SoundLose);
         StartCoroutine(EffectControl.MoveAnchor(rec, GameDefine.posCenter, 0.5f, null));
         MainObjControl.Instant.gamePlaying.isGameOver = true;
     }

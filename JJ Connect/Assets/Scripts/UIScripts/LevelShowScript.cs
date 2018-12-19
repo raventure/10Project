@@ -11,7 +11,7 @@ public class LevelShowScript : MonoBehaviour {
     }
     public void OpenMap4()
     {
-        //Debug.Log("버튼4");
+        Debug.Log("버튼4");
         Open(4);
     }
     public void OpenMap6()

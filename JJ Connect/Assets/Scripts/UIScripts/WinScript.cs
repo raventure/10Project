@@ -72,7 +72,7 @@ public class WinScript : MonoBehaviour {
         timer.text = "'"+MainCanvas.Main.barScript.timer0;
         SetActive(true);
         //캔버스 스탑 타이머
-        //사운드 출력
+        MainAudio.Main.PlaySound(TypeAudio.SoundWin);
         StartCoroutine(EffectControl.MoveAnchor(rec, GameDefine.posCenter, 0.5f, null));
 
         if(currentLevel >= Settings.GetMaxLevel(currentMap) && Settings.GetMaxLevel(currentMap) < 200)

@@ -35,7 +35,7 @@ public class OnClickCavasButton : MonoBehaviour, IPointerClickHandler {
             yield return null;
         }
         onClick.Invoke();
-        //오디오
+        MainAudio.Main.PlaySound(TypeAudio.SoundClick);
         currentTime = 0;
         while(currentTime < timeZoomIn)
         {

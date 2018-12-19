@@ -13,6 +13,10 @@ public class ItemUnit : MonoBehaviour, IPointerClickHandler {
     public GameObject lockObj;
     public GameObject openObj;
     public GameObject clearObj;
+    public GameObject gold;
+    public GameObject silver;
+    public GameObject bronze;
+    public GameObject none;
 
     public Vector3 scaleZoom = new Vector3(1.5f, 1.5f, 1.5f);
     float timeZoomOut = 0.1f;
@@ -42,24 +46,43 @@ public class ItemUnit : MonoBehaviour, IPointerClickHandler {
         clearObj.SetActive(true);
         
         Image img = clearObj.GetComponent<Image>();
+        clearText.text = index.ToString();
         switch (state)
         {
             case 2:
-                clearText.text = index.ToString()+"\n"+"Bronze";
-                img.color = new Color32(205, 127, 50, 255);
+                //clearText.text = index.ToString()+"\n"+"Bronze";
+                //img.color = new Color32(205, 127, 50, 255);
+                gold.SetActive(false);
+                silver.SetActive(false);
+                bronze.SetActive(true);
+                none.SetActive(false);
                 break;
             case 3:
-                clearText.text = index.ToString() + "\n" + "Silver";
-                img.color = new Color32(211, 211, 211, 255);
+                //clearText.text = index.ToString() + "\n" + "Silver";
+                //img.color = new Color32(211, 211, 211, 255);
+                gold.SetActive(false);
+                silver.SetActive(true);
+                bronze.SetActive(false);
+                none.SetActive(false);
                 break;
             case 4:
-                clearText.text = index.ToString() + "\n" + "Gold";
-                img.color = new Color32(255, 215, 0, 255);
+                //clearText.text = index.ToString() + "\n" + "Gold";
+                img.color = new Color32(95, 123, 166, 255);
+                
+                gold.SetActive(true);
+                silver.SetActive(false);
+                bronze.SetActive(false);
+                none.SetActive(false);
                 break;
             default:
-                clearText.text = index.ToString() + "\n" + "-";
+                gold.SetActive(false);
+                silver.SetActive(false);
+                bronze.SetActive(false);
+                none.SetActive(true);
+                //clearText.text = index.ToString() + "\n" + "-";
                 break;
         }
+
     }
 
     // 이벤트 먹이고 싶을 때
@@ -83,6 +106,7 @@ public class ItemUnit : MonoBehaviour, IPointerClickHandler {
             currentTime += Time.unscaledDeltaTime; // 타임 스케일을 무시
             yield return null;
         }
+        MainAudio.Main.PlaySound(TypeAudio.SoundClick);
         currentTime = 0;
         //처리
         /*
