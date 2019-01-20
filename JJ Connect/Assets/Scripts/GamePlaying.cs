@@ -94,7 +94,7 @@ public class GamePlaying : MonoBehaviour {
 
                 CheckGameover();
                 Nextnumber(index);
-                //오디오 처리
+                MainAudio.Main.PlaySound(TypeAudio.SoundRenew);
             }
         }
         else if(CheckRoad(vec, listArrayScript[listArrayScript.Count -1].GetValue()))
@@ -107,6 +107,7 @@ public class GamePlaying : MonoBehaviour {
             //Debug.Log(listArrayScript.Count + "/" + totalBox);
             CheckGameover();
             Nextnumber(index);
+            MainAudio.Main.PlaySound(TypeAudio.SoundRenew);
         }
         
     }

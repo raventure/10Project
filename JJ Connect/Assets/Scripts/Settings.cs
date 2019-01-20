@@ -35,7 +35,7 @@ public class Settings{
     static public List<ClearInfo> clearInfo = new List<ClearInfo>();
 
     static public List<Dictionary<string, object>> avgRecordList; //기록 리스트
-
+    static public List<Dictionary<string, object>> mainRecordData; //메인기록 리스트
 
     public static bool HasKey(string key)
     {
@@ -162,6 +162,7 @@ public class Settings{
         {
             saving = false;
             DataBaseControl.Instant.db.SetAddRecord(map, number, record, state);
+            //DataBaseControl.Instant.db.SetAddMainRecord(map, number, record);
         }
 
     }

@@ -31,6 +31,12 @@ public class ClearScript : MonoBehaviour {
             goldRec.text = Settings.clearInfo[num].goldRecord.ToString();
             silverRec.text = Settings.clearInfo[num].silverRecord.ToString();
             bronzeRec.text = Settings.clearInfo[num].bronzeRecord.ToString();
+
+            /// 19.01.02 작업중
+            /// 기록 보다 앞인 기록 개수 / 기록 개수 = 상위 % 표현.
+            /// 코루틴으로 처리.
+            /// Bar에 대한 콘트롤도 필요. 
+            /// 등수도 보일 수 있도록 함.
         }
         SetActive(true);
         StartCoroutine(EffectControl.MoveAnchor(rec, GameDefine.posCenter, 0.1f, null));

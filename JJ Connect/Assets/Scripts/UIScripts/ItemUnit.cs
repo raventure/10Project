@@ -50,7 +50,7 @@ public class ItemUnit : MonoBehaviour, IPointerClickHandler {
         switch (state)
         {
             case 2:
-                //clearText.text = index.ToString()+"\n"+"Bronze";
+                //clearText.text = index.ToString()+"\n"+"Bronze";`
                 //img.color = new Color32(205, 127, 50, 255);
                 gold.SetActive(false);
                 silver.SetActive(false);

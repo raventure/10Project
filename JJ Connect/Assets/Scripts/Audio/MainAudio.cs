@@ -18,6 +18,12 @@ public class MainAudio : MonoBehaviour
         AddComponienAudioSources();
         main = this;
     }
+
+    private void Start()
+    {
+        PlayBGSound();
+    }
+
     public static MainAudio Main
     {
         get { return main; }
@@ -37,6 +43,13 @@ public class MainAudio : MonoBehaviour
     public void StopBGSound()
     {
         audioDict[TypeAudio.SoundBG].Stop();
+    }
+    public void PlayBGSound()
+    {
+        PlaySound(TypeAudio.SoundBG);
+        audioDict[TypeAudio.SoundBG].volume = 0.3f;
+        audioDict[TypeAudio.SoundBG].loop = true; // 반복 재생
+
     }
     public void PlaySound(TypeAudio type)
     {

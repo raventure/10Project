@@ -10,6 +10,9 @@ public class DBScript : MonoBehaviour
     private string URL;
     public List<Dictionary<string, object>> data;
     public bool success = false;
+    public bool mainRecordDataSuccess = false;
+    public bool rankCountDataSuccess = false;
+    public int rankCount;
     string UUID;
     int usernum;
 
@@ -62,7 +65,41 @@ public class DBScript : MonoBehaviour
         resultFunction rf = new resultFunction(SendResult);
         StartCoroutine(DataBaseControl.Instant.conn.SendData(URL + "/AddRecord.php", form, rf));
     }
+    /* Main Record */
+    public void SetAddMainRecord(int map, int level, string record)
+    {
+        Debug.Log("메인 기록 삽입 Map["+map+"]Level["+level+"]");
+        WWWForm form = new WWWForm();
+        form.AddField("map", map);
+        form.AddField("level", level);
+        form.AddField("record", record);
+        resultFunction rf = new resultFunction(SendResult);
+        StartCoroutine(DataBaseControl.Instant.conn.SendData(URL + "/AddMainRecord.php", form, rf));
+    }
+    /* 메인 기록 가져오기 */
+    public void GetMainRecord(int map, int level)
+    {
+        //mainRecordDataSuccess = false;
+        Debug.Log("메인 기록 가져오기 map =" + map + " / level = " + level);
+        WWWForm form = new WWWForm();
+        form.AddField("map", map);
+        form.AddField("level", level);
+        resultFunction rf = new resultFunction(rf_GetMainRecordData);
+        StartCoroutine(DataBaseControl.Instant.conn.SendData(URL + "/GetMainRecordData.php", form, rf));
+    }
+    /* 내 순위보다 좋은 사람 가져오기 */
+    public void GetRankCount(int map, int level, float record)
+    {
+        //rankCountDataSuccess = false;
+        Debug.Log("순위 가져오기");
+        WWWForm form = new WWWForm();
+        form.AddField("map", map);
+        form.AddField("level", level);
+        form.AddField("record", record.ToString());
+        resultFunction rf = new resultFunction(rf_GetRankCount);
+        StartCoroutine(DataBaseControl.Instant.conn.SendData(URL + "/GetRankCount.php", form, rf));
 
+    }
 
     public void GetRecordAvgList()
     {
@@ -77,7 +114,19 @@ public class DBScript : MonoBehaviour
     {
         ListResult();
         Settings.avgRecordList = data;
+    }
 
+    void rf_GetMainRecordData()
+    {
+        Debug.Log("[DB] 메인 레코드 데이터 가져오기");
+        ListResult();
+        Settings.mainRecordData = data;
+        /*
+        Debug.Log("겟 메인 레코드 데이터 개수 :" + data.Count);
+        Debug.Log("DB 갯수 : " + Settings.mainRecordData[0]["fdCount"]);
+        Debug.Log("평균기록 : " + Settings.mainRecordData[0]["fdRecAvg"]);
+        */
+        mainRecordDataSuccess = true;
     }
 
     void rf_GetUserAuth()
@@ -96,6 +145,23 @@ public class DBScript : MonoBehaviour
             usernum = int.Parse(DataBaseControl.Instant.conn._result);
             Debug.Log("USER NUM : " + usernum);
         }
+    }
+
+    void rf_GetRankCount()
+    {
+        if(DataBaseControl.Instant.conn._result =="")
+        {
+            rankCount = 0;
+            Debug.Log("[DB 값 획득 실패] rankCount = " + rankCount);
+        }
+        else
+        {
+            rankCount = int.Parse(DataBaseControl.Instant.conn._result) + 1;
+            Debug.Log("[DB 값 획득] rankCount = " + rankCount);
+            rankCountDataSuccess = true;
+        }
+        
+        
     }
 
     void ListResult()
