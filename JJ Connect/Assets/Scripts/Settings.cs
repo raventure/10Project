@@ -21,10 +21,12 @@ public class ClearInfo
     public int level;
     public int state;
     public string date;
-    public string personReocrd;
-    public float goldRecord;
-    public float silverRecord;
-    public float bronzeRecord;
+    public float personReocrd;
+
+    public float globalAvg;
+    public int rank;
+    public int totalCount;
+
 }
 
 public class Settings{
@@ -84,10 +86,10 @@ public class Settings{
                         map = 0,
                         level = 0,
                         state = 0,
-                        goldRecord = 0.0f,
-                        silverRecord = 0.0f,
-                        bronzeRecord = 0.0f,
-                        personReocrd = "0.0",
+                        personReocrd = 0.0f,
+                        globalAvg = 0.0f,
+                        rank = 0,
+                        totalCount = 0,
                         date = DateTime.Now.ToString("yyyy-MM-dd")
                     });
                     if(i == 1)
@@ -167,7 +169,7 @@ public class Settings{
 
     }
     // 골드, 실버, 브론즈에 대한 기록 저장
-    public static void WorldRecordSave(int map, int number, int state, string rec, float goldRec, float silverRec, float bronzeRec)
+    public static void WorldRecordSave(int map, int number, int state, float rec, float avg, int ranking, int count)
     {
         Debug.Log("월드 레코드 저장 [" + map + "][" + number + "]");
 
@@ -178,26 +180,39 @@ public class Settings{
             int num = clearInfo.FindIndex(e => e.map == map && e.level == number);
             Debug.Log("월드 레코드 존재 : num : ["+num+"]");
             //갱신
-            clearInfo[num].personReocrd = rec;
+            /*
+            
             clearInfo[num].goldRecord = goldRec;
             clearInfo[num].silverRecord = silverRec;
             clearInfo[num].bronzeRecord = bronzeRec;
+            
+            */
+            clearInfo[num].personReocrd = rec;
+            clearInfo[num].state = state;
+            clearInfo[num].globalAvg = avg;
+            clearInfo[num].rank = ranking;
+            clearInfo[num].totalCount = count;
             clearInfo[num].date = DateTime.Now.ToString("yyyy-MM-dd");
         }
         else
         {
             Debug.Log("월드 레코드 없음 : "+ clearInfo.Count);
             //없으면,
-            
+
             clearInfo.Add(new ClearInfo
             {
                 map = map,
                 level = number,
                 state = state,
+                personReocrd = rec,
+                globalAvg = avg,
+                rank = ranking,
+                totalCount = count,
+                /*
                 goldRecord = goldRec,
                 silverRecord = silverRec,
                 bronzeRecord = bronzeRec,
-                personReocrd = rec,
+                */
                 date = DateTime.Now.ToString("yyyy-MM-dd")
             });
            

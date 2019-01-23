@@ -170,6 +170,7 @@ public class DBScript : MonoBehaviour
         string[] lines = DataBaseControl.Instant.conn._result.Split(new string[] { "\n" }, System.StringSplitOptions.RemoveEmptyEntries);
 
         var header = lines[0].Split(',');
+        Debug.Log("기록 갯수 :" + lines.Length);
         for (int i = 1; i < lines.Length; i++)
         {
             var values = lines[i].Split(',');

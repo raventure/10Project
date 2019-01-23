@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class WinScript : MonoBehaviour {
     public RectTransform rec;
+    public Text title;
     public Text timer;
     public Text feedback1;
     public Text feedback2;
@@ -31,12 +32,15 @@ public class WinScript : MonoBehaviour {
     int totalCount;
     int rankCount;
 
+    int currentLevel;
+    int currentMap;
+
     bool UIUpdate;
 
-    Color32 defaultColor = new Color32(200, 200, 200, 255);
-    Color32 Level1Color = new Color32(245, 177, 255, 255);
-    Color32 Level2Color = new Color32(210, 177, 255, 255);
-    Color32 Level3Color = new Color32(187, 177, 255, 255);
+    public Color32 defaultColor = new Color32(200, 200, 200, 255);
+    public Color32 Level1Color = new Color32(245, 177, 255, 255);
+    public Color32 Level2Color = new Color32(210, 177, 255, 255);
+    public Color32 Level3Color = new Color32(187, 177, 255, 255);
 
     public void Reset()
     {
@@ -50,10 +54,10 @@ public class WinScript : MonoBehaviour {
 
         // 1. 세팅 
         UIUpdate = true;
-        clearLevel = 0;
+        clearLevel = 1;
         MainState.SetState(MainState.State.GameOver);
-        int currentLevel = MainCanvas.Main.startGameScript.currentLevel;
-        int currentMap = MainCanvas.Main.startGameScript.currentMap;
+        currentLevel = MainCanvas.Main.startGameScript.currentLevel;
+        currentMap = MainCanvas.Main.startGameScript.currentMap;
         int state = 1;
         clearTimer = float.Parse(MainCanvas.Main.barScript.timer0);
 
@@ -66,6 +70,7 @@ public class WinScript : MonoBehaviour {
         
         // U.I 갱신
         {
+            title.text = "Stage " + currentLevel;
             timer.text = "'" + MainCanvas.Main.barScript.timer0; // 타이머 기록 갱신
             clearLevel1.color = defaultColor;
             clearLevel2.color = defaultColor;
@@ -116,43 +121,8 @@ public class WinScript : MonoBehaviour {
             Settings.SetMaxLevel(currentMap, currentLevel + 1);
         }
 
-
-        /*
-        if(float.Parse(MainCanvas.Main.barScript.timer0) <= (avg - std))
-        {
-            state = 4;
-            medalImg[0].color = new Color32(255, 215, 0, 255);
-            medalImg[1].color = new Color32(255, 255, 255, 255);
-            medalImg[2].color = new Color32(255, 255, 255, 255);
-            feedback.text = "PERFECT!";
-        }
-        else if(float.Parse(MainCanvas.Main.barScript.timer0) <= avg)
-        {
-            state = 3;
-            medalImg[0].color = new Color32(255, 255, 255, 255);
-            medalImg[1].color = new Color32(211, 211, 211, 255);
-            medalImg[2].color = new Color32(255, 255, 255, 255);
-            feedback.text = "GREAT!";
-        }
-        else if (float.Parse(MainCanvas.Main.barScript.timer0) <= (avg+std))
-        {
-            state = 2;
-            medalImg[0].color = new Color32(255, 255, 255, 255);
-            medalImg[1].color = new Color32(255, 255, 255, 255);
-            medalImg[2].color = new Color32(205, 127, 50, 255);
-            feedback.text = "GOOD!";
-        }
-        else
-        {
-            state = 1;
-            medalImg[0].color = new Color32(255, 255, 255, 255);
-            medalImg[1].color = new Color32(255, 255, 255, 255);
-            medalImg[2].color = new Color32(255, 255, 255, 255);
-            feedback.text = "NOT BAD.";
-        }
-        */
-        Save(currentMap, currentLevel, state, MainCanvas.Main.barScript.timer0);
-        Settings.WorldRecordSave(currentMap, currentLevel, state, MainCanvas.Main.barScript.timer0, goldRecord, silverRecord, bronzeRecord);
+        //Save(currentMap, currentLevel, state, MainCanvas.Main.barScript.timer0);
+        //Settings.WorldRecordSave(currentMap, currentLevel, state, MainCanvas.Main.barScript.timer0, goldRecord, silverRecord, bronzeRecord);
         
     }
 
@@ -161,7 +131,6 @@ public class WinScript : MonoBehaviour {
         // 동적 U.I처리를 위한 것들 (DB에서 받아오는 시간이 걸려 업데이트로 지속 처리
         if (UIUpdate)
         {
-
             GlobalAvg.text = "Wait...";
             feedback1.text = "Wait...........";
             feedback2.text = "Wait...";
@@ -179,48 +148,64 @@ public class WinScript : MonoBehaviour {
             // 메인 기록을 가져왔는지 체크.
             if (DataBaseControl.Instant.db.mainRecordDataSuccess)
             {
-                globalRecAvg = float.Parse(Settings.mainRecordData[0]["fdRecAvg"].ToString());
-                totalCount = int.Parse(Settings.mainRecordData[0]["fdCount"].ToString()) + 1;
+                // 기록이 있으면 표시
+                if(Settings.mainRecordData[0].Count >= 1)
+                {
+                    globalRecAvg = float.Parse(Settings.mainRecordData[0]["fdRecAvg"].ToString());
+                    totalCount = int.Parse(Settings.mainRecordData[0]["fdCount"].ToString()) + 1;
+                }
+                else
+                {
+                    Debug.Log("기록 안넘어옴");
+                }
+                
             }
             // 정상 값이 들어올 경우 U.I 업데이트 중지
             if(rankCount >= 1 && totalCount >= 1)
             {
+
                 UIUpdate = false;
-            }
-        }
-        else
-        {
-            float userPer = (float)rankCount / (float)totalCount; 
-            // U.I 기록
-            GlobalAvg.text = "Global Average '" + globalRecAvg; //글로벌 기록
-            feedback2.text = rankCount + " / " + totalCount;
-            runBar.fillAmount = 1 - userPer;
-            feedback1.text = "belong to " + Mathf.Round((userPer*100)).ToString("N2") + "% world record";
-            if (userPer <= 0.3)
-            {
-                clearLevel = 3;
-                clearLevel1.color = Level1Color;
-            }
-            else if( userPer <= 0.5)
-            {
-                clearLevel = 2;
-                clearLevel2.color = Level2Color;
-            }
-            else if( userPer <= 0.7)
-            {
-                clearLevel = 1;
-                clearLevel3.color = Level3Color;
-            }
-            if(clearTimer <= globalRecAvg)
-            {
-                feedback3.text = "↑ '0." + Mathf.Round((globalRecAvg - clearTimer)* 1000.0f) +" Sec";
-                feedback3.color = new Color32(241, 110, 125, 255);
+
+                float userPer = (float)rankCount / (float)totalCount;
+                // U.I 기록
+                GlobalAvg.text = "Global Average '" + globalRecAvg; //글로벌 기록
+                feedback2.text = rankCount + " / " + totalCount;
+                runBar.fillAmount = 1 - userPer;
+                feedback1.text = "belong to " + Mathf.Round((userPer * 100)).ToString("N2") + "% world record";
+                if (userPer <= 0.3)
+                {
+                    clearLevel = 4;
+                    clearLevel1.color = Level1Color;
+                }
+                else if (userPer <= 0.5)
+                {
+                    clearLevel = 3;
+                    clearLevel2.color = Level2Color;
+                }
+                else if (userPer <= 0.7)
+                {
+                    clearLevel = 2;
+                    clearLevel3.color = Level3Color;
+                }
+                if (clearTimer <= globalRecAvg)
+                {
+                    feedback3.text = "↑ '0." + Mathf.Round((globalRecAvg - clearTimer) * 1000.0f) + " Sec";
+                    feedback3.color = new Color32(241, 110, 125, 255);
+                }
+                else
+                {
+                    feedback3.text = "↓ '0." + Mathf.Round((clearTimer - globalRecAvg) * 1000.0f) + " Sec";
+                    feedback3.color = new Color32(110, 184, 241, 255);
+                }
+                Debug.Log("저장");
+                Save(currentMap, currentLevel, clearLevel, MainCanvas.Main.barScript.timer0);
+                Settings.WorldRecordSave(currentMap, currentLevel, clearLevel, clearTimer, globalRecAvg, rankCount, totalCount);
             }
             else
             {
-                feedback3.text = "↓ '0." + Mathf.Round((clearTimer - globalRecAvg) * 1000.0f) + " Sec";
-                feedback3.color = new Color32(110, 184, 241, 255);
+
             }
+
         }
         
 
