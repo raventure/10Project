@@ -126,7 +126,11 @@ public class DBScript : MonoBehaviour
         Debug.Log("DB 갯수 : " + Settings.mainRecordData[0]["fdCount"]);
         Debug.Log("평균기록 : " + Settings.mainRecordData[0]["fdRecAvg"]);
         */
-        mainRecordDataSuccess = true;
+        if(data.Count >= 1)
+        {
+            mainRecordDataSuccess = true;
+        }
+        
     }
 
     void rf_GetUserAuth()

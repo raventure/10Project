@@ -14,6 +14,7 @@ public class MainCanvas : MonoBehaviour {
     public LostScript           lostScript;
     public Bar                  barScript;
     public ClearScript          clearScript;
+    public TutorialScript       tutorialScript;
 
 
     public static MainCanvas Main
@@ -31,6 +32,7 @@ public class MainCanvas : MonoBehaviour {
     }
     void Preload()
     {
+        MainState.allowButton = true;
         selectLevelScript.Preload();
     }
     public void Reset(MainState.StateBack stateBack)
@@ -38,6 +40,9 @@ public class MainCanvas : MonoBehaviour {
         MainObjControl.Instant.gamePlaying.Reset();
         MainObjControl.Instant.lineControl.Reset();
 
+        //
+        barScript.StopTimer();
+        tutorialScript.Reset();
         //캔버스 처리
         switch(stateBack)
         {

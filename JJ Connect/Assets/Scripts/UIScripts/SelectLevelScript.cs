@@ -11,6 +11,7 @@ public class SelectLevelScript : MonoBehaviour {
     
     public void Preload()
     {
+        addScript.InitTable();
         addScript.CreateTable();
         listUnit = addScript.listunit;
     }
@@ -20,19 +21,20 @@ public class SelectLevelScript : MonoBehaviour {
         
     }
 
+
     public void SetActive(bool isActive)
     {
         gameObject.SetActive(isActive);
         if(isActive)
         {
             int map = MainCanvas.Main.levelShowScript.mapSelecting;
-            //int map = 4;
             SetContentTable(map);
             rec.anchoredPosition = new Vector2(0, -3640.105f);
         }
     }
     void SetContentTable(int map)
     {
+        Debug.Log("테이블 세팅");
         Settings.Load();
         int maxLv = Settings.GetMaxLevel(map);
         //Debug.Log("맥스 레벨 체크 :" + maxLv);
@@ -53,9 +55,25 @@ public class SelectLevelScript : MonoBehaviour {
             if(Settings._saveInfo0[i].state >= 1)
             {
                 listUnit[i].SetClear(Settings._saveInfo0[i].state);
-                
+            }
+            else
+            {
+                listUnit[i].SetInit();
             }
             
         }
+    }
+
+    public void Back()
+    {
+        Debug.Log("Back");
+        MainCanvas.Main.fadeScript.Fade(new FaderControl.Callback0(MiddleBack));
+    }
+    void MiddleBack()
+    {
+        Debug.Log("MiddleBack");
+        MainState.SetState(MainState.State.SelectMap);
+        MainCanvas.Main.levelShowScript.SetActive(true);
+        SetActive(false);
     }
 }

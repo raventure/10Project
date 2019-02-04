@@ -245,6 +245,7 @@ public class Settings{
     // 로드
     public static void Load()
     {
+        Debug.Log("[로드] 현재 난이도 : " + MainCanvas.Main.levelShowScript.mapSelecting);
         clearInfo = LoadClaerInfo();
         saveInfo4 = LoadSaveInfo(4);
         saveInfo6 = LoadSaveInfo(6);
@@ -263,6 +264,7 @@ public class Settings{
         var             _saveInfo = "";
         List<SaveInfo>  saveInfo = new List<SaveInfo>();
 
+        //Debug.Log("[로드] " + map + "에 대한 저장 불러오기");
         switch (map)
         {
             case 4:
@@ -354,6 +356,30 @@ public class Settings{
 
 
 
+    public static void SetTutorial(int value)
+    {
+        PlayerPrefs.SetInt("tutorial", value);
+    }
+
+    public static int GetTutorial()
+    {
+        return PlayerPrefs.GetInt("tutorial");
+    }
+
+    public static bool ShowTutorial()
+    {
+        if(!Settings.HasKey("tutorial"))
+        {
+            Settings.SetTutorial(0);
+        }
+        int currentShow = GetTutorial();
+        if(currentShow > 3)
+        {
+            Settings.SetTutorial(currentShow + 1);
+            return true;
+        }
+        return false;
+    }
 
 
 

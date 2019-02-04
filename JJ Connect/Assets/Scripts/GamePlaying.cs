@@ -11,26 +11,10 @@ public class GamePlaying : MonoBehaviour {
     int max;
     public int currentNumber;
 
-    public void Reset()
-    {
-        for(int i = 0; i <listArrayScript.Count; i++)
-        {
-            listArrayScript[i].Reset();
-        }
-        listArrayScript = new List<TableUnit>();
-        isGameOver = false;
-        currentNumber = 0;
-        // 인 게임 스크립트
-        if(totalBox != 0)
-        {
-            //인 게임 스크립트
-        }
-    }
-
     public void SetValue(int newTotal, int maxNumber)
     {
         totalBox = newTotal;
-        switch(maxNumber)
+        switch (maxNumber)
         {
             case 4:
                 max = 4 + 1;
@@ -43,6 +27,25 @@ public class GamePlaying : MonoBehaviour {
                 break;
         }
     }
+
+    public void Reset()
+    {
+        for(int i = 0; i <listArrayScript.Count; i++)
+        {
+            listArrayScript[i].Reset();
+        }
+        listArrayScript = new List<TableUnit>();
+        isGameOver = false;
+        currentNumber = 0;
+        MainCanvas.Main.inGameScript.SetNumberNext(1, max, isGameOver);
+
+        if (totalBox != 0)
+        {
+            MainCanvas.Main.inGameScript.SetLength(0, totalBox);
+        }
+    }
+
+
 
     public void TableUnitPress(Vec2 vec, bool isFree, int index)
     {
@@ -77,7 +80,7 @@ public class GamePlaying : MonoBehaviour {
         if (index == currentNumber + 1)
         {
             currentNumber++;
-            //캔버스 처리
+            MainCanvas.Main.inGameScript.SetNumberNext(currentNumber + 1, max, isGameOver);
         }
     }
     void FreePress(Vec2 vec, int index)
@@ -122,7 +125,7 @@ public class GamePlaying : MonoBehaviour {
                 MainObjControl.Instant.lineControl.RemovePoint();
                 listArrayScript[listArrayScript.Count - 1].ChangeToNormalColor();
                 listArrayScript.RemoveAt(listArrayScript.Count - 1);
-                //캔버스 처리
+                MainCanvas.Main.inGameScript.SetLength(listArrayScript.Count, totalBox);
 
             }
         }
@@ -132,7 +135,7 @@ public class GamePlaying : MonoBehaviour {
         if(currentNumber == index)
         {
             currentNumber = Mathf.Max(0, currentNumber - 1);
-            //캔버스 처리
+            MainCanvas.Main.inGameScript.SetNumberNext(currentNumber + 1, max, isGameOver);
         }
     }
     bool CheckRoad(Vec2 v1, Vec2 v2)
@@ -151,16 +154,15 @@ public class GamePlaying : MonoBehaviour {
 
     void CheckGameover()
     {
-        //Debug.Log("CheckGameover");
         int current = listArrayScript.Count;
-        if(!isGameOver && current == totalBox)
+        MainCanvas.Main.inGameScript.SetLength(current, totalBox);
+        if (!isGameOver && current == totalBox)
         {
             Debug.Log("게임오버");
             isGameOver = true;
+            MainCanvas.Main.inGameScript.SetNumberNextDone();
             MainCanvas.Main.Win();
-
         }
-        //캔버스 처리
         
         
     }

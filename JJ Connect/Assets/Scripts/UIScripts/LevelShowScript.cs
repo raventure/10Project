@@ -25,8 +25,9 @@ public class LevelShowScript : MonoBehaviour {
     void Open(int map)
     {
         mapSelecting = map;
+        //Settings.InstantLoad();
         MainCanvas.Main.fadeScript.Fade(new FaderControl.Callback0(MiddleSelect));
-        // 캔버스
+        
     }
     void MiddleSelect()
     {
@@ -36,6 +37,11 @@ public class LevelShowScript : MonoBehaviour {
     }
     public void SetActive(bool isActive)
     {
+        if(isActive)
+        {
+            Debug.Log("난이도 설정 화면");
+            //MainCanvas.Main.selectLevelScript.Preload();
+        }
         gameObject.SetActive(isActive);
     }
 

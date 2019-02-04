@@ -40,7 +40,8 @@ public class ClearScript : MonoBehaviour {
         title.text = "Stage " + number;
         timer.text = "'" + clearTimer; // 타이머 기록 갱신
         GlobalAvg.text = "Global Average '" + globalRecAvg; //글로벌 기록
-        feedback2.text = rankCount + " / " + totalCount;
+        feedback2.text = string.Format("{0:n0}", rankCount) + " / " + string.Format("{0:n0}", totalCount);
+
         runBar.fillAmount = 1 - userPer;
         feedback1.text = "belong to " + Mathf.Round((userPer * 100)).ToString("N2") + "% world record";
 

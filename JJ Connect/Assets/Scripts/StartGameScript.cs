@@ -38,14 +38,16 @@ public class StartGameScript : MonoBehaviour {
     }
     public void Midle()
     {
-        Debug.Log("Midle Call ["+currentMap+"]");
-        //currentLevel = 1;
-        //currentMap = 4;
+        Debug.Log("StartGameScript : Midle Call ["+currentMap+"]");
         MainState.SetState(MainState.State.Ingame);
         MainObjControl.Instant.cubeCreater.CreateTableUnit(currentMap, currentMap, currentLevel);
-        
+        MainObjControl.Instant.lineControl.Reset();
+
         MainCanvas.Main.selectLevelScript.SetActive(false);
         MainCanvas.Main.barScript.TimerGo(currentMap);
+        MainCanvas.Main.tutorialScript.ShowToturial();
+
+        SetActive(false);
     }
 
 }

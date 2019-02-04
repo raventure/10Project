@@ -47,6 +47,8 @@ public class ItemUnit : MonoBehaviour, IPointerClickHandler {
         
         Image img = clearObj.GetComponent<Image>();
         clearText.text = index.ToString();
+
+        img.color = new Color32(255, 129, 129, 255);
         switch (state)
         {
             case 2:
@@ -83,6 +85,12 @@ public class ItemUnit : MonoBehaviour, IPointerClickHandler {
                 break;
         }
 
+    }
+    public void SetInit()
+    {
+        openObj.SetActive(true);
+        lockObj.SetActive(false);
+        clearObj.SetActive(false);
     }
 
     // 이벤트 먹이고 싶을 때

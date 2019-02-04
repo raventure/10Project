@@ -60,7 +60,7 @@ public class CubeCreater : MonoBehaviour {
         MainObjControl.Instant.gamePlaying.listScript = listScript;
         ApplyData(indexData, newRow);
         MainObjControl.Instant.cam.ChangeView(newRow);
-        //캔버스 처리
+        MainCanvas.Main.inGameScript.SetLevel(indexData);
 
 
     }
@@ -100,6 +100,7 @@ public class CubeCreater : MonoBehaviour {
         }
         int totalBox = numberRow * numberCol - brick;
         MainObjControl.Instant.gamePlaying.SetValue(totalBox, map);
+        MainCanvas.Main.inGameScript.SetLength(0, totalBox);
         //캔버스 처리
     }
     void InstantNewPKC(Vector3 pos, int row, int col)

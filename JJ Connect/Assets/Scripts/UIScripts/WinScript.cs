@@ -113,8 +113,9 @@ public class WinScript : MonoBehaviour {
         SetActive(true);
         //캔버스 스탑 타이머
         MainAudio.Main.PlaySound(TypeAudio.SoundWin);
+
         // 3번째 인자값은 뜨는 연출 시간.
-        StartCoroutine(EffectControl.MoveAnchor(rec, GameDefine.posCenter, 0.0f, null));
+        StartCoroutine(EffectControl.MoveAnchor(rec, GameDefine.posCenter, 1.0f, null));
 
         if(currentLevel >= Settings.GetMaxLevel(currentMap) && Settings.GetMaxLevel(currentMap) < 200)
         {
@@ -168,8 +169,9 @@ public class WinScript : MonoBehaviour {
 
                 float userPer = (float)rankCount / (float)totalCount;
                 // U.I 기록
+
                 GlobalAvg.text = "Global Average '" + globalRecAvg; //글로벌 기록
-                feedback2.text = rankCount + " / " + totalCount;
+                feedback2.text = string.Format("{0:n0}",rankCount) + " / " + string.Format("{0:n0}",totalCount);
                 runBar.fillAmount = 1 - userPer;
                 feedback1.text = "belong to " + Mathf.Round((userPer * 100)).ToString("N2") + "% world record";
                 if (userPer <= 0.3)
@@ -189,12 +191,12 @@ public class WinScript : MonoBehaviour {
                 }
                 if (clearTimer <= globalRecAvg)
                 {
-                    feedback3.text = "↑ '0." + Mathf.Round((globalRecAvg - clearTimer) * 1000.0f) + " Sec";
+                    feedback3.text = "↑ " + Mathf.Round((globalRecAvg - clearTimer) * 1000.0f)/1000.0f + " Sec";
                     feedback3.color = new Color32(241, 110, 125, 255);
                 }
                 else
                 {
-                    feedback3.text = "↓ '0." + Mathf.Round((clearTimer - globalRecAvg) * 1000.0f) + " Sec";
+                    feedback3.text = "↓ '" + Mathf.Round((clearTimer - globalRecAvg) * 1000.0f)/1000.0f + " Sec";
                     feedback3.color = new Color32(110, 184, 241, 255);
                 }
                 Debug.Log("저장");

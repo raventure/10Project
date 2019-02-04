@@ -47,7 +47,7 @@ public class MainAudio : MonoBehaviour
     public void PlayBGSound()
     {
         PlaySound(TypeAudio.SoundBG);
-        audioDict[TypeAudio.SoundBG].volume = 0.3f;
+        audioDict[TypeAudio.SoundBG].volume = 0.1f;
         audioDict[TypeAudio.SoundBG].loop = true; // 반복 재생
 
     }
