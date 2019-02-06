@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/JACK/Documents/GitHub/10Project/JJ Connect/Let's Connect(0.1).apk
+C:/Users/JACK/Documents/GitHub/10Project/JJ Connect/Let's Connect(0.15).apk
 SceneListBegin?
 Assets/Scenes/SampleScene.unity
 SceneListEnd?
@@ -183,6 +183,7 @@ fb6467f5819222df7c8ab10272643603 Assembly-CSharp.dll:.OnChangeScale
 8a8af8196454a7b5a72fa55add736875 Assembly-CSharp.dll:.LevelShowScript
 aece90ccd0bea34db507030ef5bf1b06 Assembly-CSharp.dll:UnityEngine.UI.bl_ToggleSwitcher
 ced5c55b16d84c0e025233d30f805407 Assembly-CSharp.dll:.ClearScript
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.AdMobRewardVideo
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
@@ -190,3 +191,4 @@ c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 f34d7c3ba22aacfb50aed5a1ac413d69 Assembly-CSharp.dll:.MainObjControl
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ConnectScript
 f000790cf3025dbea17668cd248e8512 Assembly-CSharp.dll:.Bar
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.AdMob
