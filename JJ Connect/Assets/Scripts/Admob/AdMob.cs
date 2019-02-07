@@ -27,13 +27,13 @@ public class AdMob : MonoBehaviour
 
 #elif UNITY_ANDROID
     string appId                = "ca-app-pub-5962671645854399~5778397915";
-    string adUnitId             = "ca-app-pub-5962671645854399/5203682845";
-    string adUnitVideoId        = "ca-app-pub-5962671645854399/5203682845";
+    string adUnitId             = "ca-app-pub-3940256099942544/6300978111";
+    string adUnitVideoId        = "ca-app-pub-3940256099942544/5224354917";
 
 #elif UNITY_IPHONE
     string appId                = "ca-app-pub-5962671645854399~5778397915";
     string adUnitId             = "ca-app-pub-5962671645854399/5203682845";
-    string adUnitVideoId        = "ca-app-pub-5962671645854399/5203682845";
+    string adUnitVideoId        = "ca-app-pub-5962671645854399/2800525561";
 #else
     string appId                = "unexpected_platform";
     string adUnitId             = "unexpected_platform";
@@ -161,7 +161,7 @@ public class AdMob : MonoBehaviour
 
 
     // 보상형 광고 보기
-    private void UserOptToWatchAd()
+    public void UserOptToWatchAd()
     {
         if (rewardBasedVideo.IsLoaded())
         {

@@ -135,6 +135,7 @@
     <Compile Include="Assets\Scripts\UIScripts\LostScript.cs" />
     <Compile Include="Assets\Scripts\UIScripts\MainCanvas.cs" />
     <Compile Include="Assets\Scripts\UIScripts\OnClickCavasButton.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\ReadyScript.cs" />
     <Compile Include="Assets\Scripts\UIScripts\SelectLevelClickButton.cs" />
     <Compile Include="Assets\Scripts\UIScripts\SelectLevelScript.cs" />
     <Compile Include="Assets\Scripts\UIScripts\TutorialScript.cs" />

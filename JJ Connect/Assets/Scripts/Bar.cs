@@ -7,6 +7,7 @@ public class Bar : MonoBehaviour {
 
     public Image image;
     public Text second;
+
     public string timer0;
 
     float duration;
@@ -17,7 +18,7 @@ public class Bar : MonoBehaviour {
     public void TimerGo(int map)
     {
         float totalDuration;
-        switch(map)
+        switch (map)
         {
             case 4:
                 duration = 20;
@@ -30,9 +31,9 @@ public class Bar : MonoBehaviour {
                 break;
         }
         StopTimer();
-
         timeRun = StartTimer();
         StartCoroutine(timeRun);
+
     }
 
     public void StopTimer()

@@ -100,6 +100,9 @@ public class ClearScript : MonoBehaviour {
     public void ReStart()
     {
         Debug.Log("재시작 버튼 입력");
+
+        AdMob.Instance.UserOptToWatchAd(); //보상형 광고 동작
+
         int level = MainCanvas.Main.startGameScript.currentLevel-1;
         switch ( MainCanvas.Main.startGameScript.currentMap)
         {

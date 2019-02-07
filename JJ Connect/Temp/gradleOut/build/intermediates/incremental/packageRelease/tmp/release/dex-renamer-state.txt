@@ -1,4 +1,0 @@
-#Wed Feb 06 20:31:53 KST 2019
-base.0=C\:\\Users\\JACK\\Documents\\GitHub\\10Project\\JJ Connect\\Temp\\gradleOut\\build\\intermediates\\transforms\\dexMerger\\release\\0
-path.0=classes.dex
-renamed.0=classes.dex

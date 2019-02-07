@@ -15,6 +15,7 @@ public class MainCanvas : MonoBehaviour {
     public Bar                  barScript;
     public ClearScript          clearScript;
     public TutorialScript       tutorialScript;
+    public ReadyScript          readyScript;
 
 
     public static MainCanvas Main

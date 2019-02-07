@@ -227,7 +227,6 @@ public class Settings{
     // 해당 유저가 신규 유저일 경우 SAVE 정보 초기화
     public static void CheckNRU()
     {
-        
         if (PlayerPrefs.GetInt("nru") == 0)
         {
             Debug.Log("신규 유저");
@@ -236,6 +235,7 @@ public class Settings{
             InitData(8);
             InitData(100);                  // ClearInfo Init
             PlayerPrefs.SetInt("nru", 1);
+            SetAdPoint(3); //애드 포인트 발급
         }
         else
         {
@@ -368,17 +368,29 @@ public class Settings{
 
     public static bool ShowTutorial()
     {
-        if(!Settings.HasKey("tutorial"))
+        if (!Settings.HasKey("tutorial"))
         {
             Settings.SetTutorial(0);
         }
         int currentShow = GetTutorial();
-        if(currentShow > 3)
+        if (currentShow > 3)
         {
             Settings.SetTutorial(currentShow + 1);
             return true;
         }
         return false;
+    }
+
+
+    public static void SetAdPoint(int value)
+    {
+        PlayerPrefs.SetInt("adPoint", value);
+    }
+
+
+    public static int GetAdPoint()
+    {
+        return PlayerPrefs.GetInt("adPoint");
     }
 
 

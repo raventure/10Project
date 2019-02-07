@@ -7,6 +7,7 @@ public class GamePlaying : MonoBehaviour {
     public TableUnit[,] listScript;
     public List<TableUnit> listArrayScript;
     public bool isGameOver;
+    public bool isGameStart;
     public int totalBox;
     int max;
     public int currentNumber;
@@ -49,23 +50,26 @@ public class GamePlaying : MonoBehaviour {
 
     public void TableUnitPress(Vec2 vec, bool isFree, int index)
     {
-        
-        if(!isGameOver)
+        if (isGameStart)
         {
-            if (isFree)
+            if (!isGameOver)
             {
-                if(CheckNumberOnly(index))
+                if (isFree)
                 {
-                    //Debug.Log("Free");
-                    FreePress(vec, index);
+                    if (CheckNumberOnly(index))
+                    {
+                        //Debug.Log("Free");
+                        FreePress(vec, index);
+                    }
+                }
+                else
+                {
+                    //Debug.Log("Select");
+                    SelectPress(vec, index);
                 }
             }
-            else
-            {
-                //Debug.Log("Select");
-                SelectPress(vec, index);
-            }
         }
+
     }
     bool CheckNumberOnly(int index)
     {

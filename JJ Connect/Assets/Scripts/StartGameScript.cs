@@ -44,7 +44,10 @@ public class StartGameScript : MonoBehaviour {
         MainObjControl.Instant.lineControl.Reset();
 
         MainCanvas.Main.selectLevelScript.SetActive(false);
-        MainCanvas.Main.barScript.TimerGo(currentMap);
+        MainCanvas.Main.readyScript.SetActive(true);
+        MainCanvas.Main.readyScript.currentMap = currentMap;
+        //MainCanvas.Main.barScript.TimerGo(currentMap); // 게임 시작
+
         MainCanvas.Main.tutorialScript.ShowToturial();
 
         SetActive(false);
